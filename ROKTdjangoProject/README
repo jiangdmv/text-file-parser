@@ -1,0 +1,57 @@
+
+build:
+docker-compose -f docker-compose-deploy.yml up --build
+
+
+run:
+docker-compose -f docker-compose-deploy.yml up
+
+
+
+
+First API:
+upload the file.
+
+http://127.0.0.1:8279/app/test-files
+
+POST: upload files
+uploaded files are stored at /upload/ folder.
+
+
+
+Second API:
+POST a query with from/to, analyize the file name and get the time interval, GET return the data.
+
+http://127.0.0.1:8279/
+
+POST: upload payload
+{"filename":"sample1.txt", "from":"2021-07-06T23:00:00Z", "to": "2020-07-06T23:00:00Z"}
+
+GET:  return
+[
+  {
+    "eventTime":"2000-01-01T03:05:58Z",
+    "email":"test123@test.com",
+    "sessionId":"97994694-ea5c-4da7-a4bb-d6423321ccd0"
+  },
+  {
+    "eventTime":"2000-01-01T04:05:58Z",
+    "email":"test456@test.com",
+    "sessionId":"97994694-ea5c-4da7-a4bb-d6423321ccd1"
+  }
+]
+
+
+
+Database:
+PostgreSQL
+
+
+Memo:
+The file is read by lines, so it is constant memory consumption regardless of file size.
+
+
+
+
+
+
